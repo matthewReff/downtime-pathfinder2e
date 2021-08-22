@@ -1,4 +1,4 @@
-class IncomeTableEntry {
+interface IncomeTableEntry {
     readonly taskLevel: number;
     readonly DC: number;
     readonly failedReward: number;
@@ -26,7 +26,7 @@ class Form extends FormApplication {
 	constructor([...args]) {
 	  super([...args]);
 
-	  let temp3: Game = game as Game;
+	  const temp3: Game = game as Game;
 	  temp3.users?.apps?.push(this);
 	}
 
@@ -43,7 +43,8 @@ class Form extends FormApplication {
 	}
 
 	async _updateObject(event: Event, formData: FormData) {
-		
+		console.log(event);
+		console.log(formData);
 	}
 }
 
