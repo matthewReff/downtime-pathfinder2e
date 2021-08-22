@@ -1,24 +1,14 @@
 {
-  "name": "module",
-  "title": "New Module",
-  "description": "",
+  "name": "downtime-pathfinder2e",
+  "title": "Downtime - Pathfinder2e",
+  "description": "Adds support for Pathfinder2e downtime",
   "version": "This is auto replaced",
   "library": "false",
   "manifestPlusVersion": "1.0.0",
   "minimumCoreVersion": "0.7.9",
   "compatibleCoreVersion": "0.7.9",
-  "authors": [
-    {
-      "name": "Blackcloud",
-      "url": "https://github.com/Blackcloud010",
-      "discord": "Blackcloud010#5426"
-    },
-    {
-      "name": "The League of Extraordinary FVTT Developers",
-      "url": "https://github.com/League-of-Foundry-Developers",
-      "discord": "discordID#0001"
-    }
-  ],
+  "author": "Matthew Reff",
+  "url": "https://github.com/matthewReff/downtime-pathfinder2e",
   "dependencies": [
 
   ],
@@ -29,7 +19,10 @@
     "module.js"
   ],
   "scripts": [
-
+    "scripts/downtimeState.js",
+    "scripts/downtimeLogic.js",
+    "scripts/viewModel.js",
+    "scripts/view.js" 
   ],
   "styles": [
     "/styles/module.css"
@@ -47,7 +40,7 @@
   "media": [
     {
       "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
+      "url": "https://avatars.githubusercontent.com/u/30309082?s=400&v=4"
     }
   ]
 }

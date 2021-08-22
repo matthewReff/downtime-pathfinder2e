@@ -1,18 +1,17 @@
 {
-  "name": "placeholder",
-  "version": "1.0.0",
-  "description": "Placeholder.",
+  "name": "downtime-pathfinder2e",
+  "version": "0.0.1",
+  "description": "Downtime implementation for pathfinder 2e",
   "private": true,
   "scripts": {
     "build": "webpack",
     "build:production": "webpack --mode production --env mode=production",
     "start": "webpack serve --hot"
   },
-  "repository": {},
-  "author": "Blackcloud010",
+  "author": "Matthew Reff",
   "license": "MIT",
   "devDependencies": {
-    "@league-of-foundry-developers/foundry-vtt-types": "^0.7.9-5",
+    "@league-of-foundry-developers/foundry-vtt-types": "^0.8.8-8",
     "@types/marked": "^2.0.2",
     "@types/webpack-env": "^1.16.0",
     "@typescript-eslint/eslint-plugin": "^4.22.0",
