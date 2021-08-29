@@ -38,7 +38,9 @@ module.exports = (env) => {
         },
         devServer: {
             hot: true,
-            writeToDisk: true,
+            devMiddleware: {
+                writeToDisk: true
+            },
             proxy: [
                 {
                     context: (pathname) => {
