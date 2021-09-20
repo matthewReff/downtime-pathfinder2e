@@ -9,7 +9,7 @@ class DowntimeState {
 		this.createdTasks = new Set<Task>();
 	}
 
-	createTask(taskName: string, loreString: string, taskLevel: number): boolean{
+	createTask(taskName: string, loreString: string, taskLevel: number): boolean {
 		let compareTask: Task = new Task(taskName, loreString, taskLevel);
 		if (this.createdTasks.contains(compareTask)){
 			return false
@@ -18,7 +18,7 @@ class DowntimeState {
 		return true;
 	}
 
-	updateTask(oldTaskName: string, oldloreString: string, oldTaskLevel: number, newTaskName: string, newLoreString: string, newTaskLevel: number): boolean{
+	updateTask(oldTaskName: string, oldloreString: string, oldTaskLevel: number, newTaskName: string, newLoreString: string, newTaskLevel: number): boolean {
 		// check if old task exists
 		let oldTask: Task = new Task(oldTaskName, oldloreString, oldTaskLevel);
 		if (!this.createdTasks.contains(oldTask)){
@@ -35,7 +35,7 @@ class DowntimeState {
 		return this.deleteTask(oldTaskName, oldloreString, oldTaskLevel) && this.createTask(newTaskName, newLoreString, newTaskLevel)
 	}
 
-	deleteTask(taskName: string, loreString: string, taskLevel: number): boolean{
+	deleteTask(taskName: string, loreString: string, taskLevel: number): boolean {
 		let compareTask: Task = new Task(taskName, loreString, taskLevel);
 		if (this.createdTasks.contains(compareTask)){
 			this.createdTasks.remove(compareTask);
@@ -44,7 +44,7 @@ class DowntimeState {
 		return false;
 	}
 
-	getTasks(): Task[]{
+	getTasks(): Task[] {
 		return this.createdTasks.toArray();
 	}
 }

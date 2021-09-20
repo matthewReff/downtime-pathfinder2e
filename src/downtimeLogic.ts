@@ -1,4 +1,4 @@
-import { IncomeTableEntry } from "./commonClasses";
+import { IncomeTableEntry, SuccessLevel, SuccessLevelInverse } from "./commonClasses";
 
 class DowntimeLogic{
     // Sourced from: https://2e.aonprd.com/Actions.aspx?ID=23
@@ -29,23 +29,25 @@ class DowntimeLogic{
 
     calculateReward(taskLevel: number, roll: DiceTerm.Result, expertise: string): number{
         let associatedTableEntry: IncomeTableEntry = this.lookup[taskLevel];
-        let successLevel: number = this.rollSkillCheck(roll, associatedTableEntry.DC);
+        let successLevel: SuccessLevel = this.rollSkillCheck(roll, associatedTableEntry.DC);
 
         // Failure states are easy, just return them
-        if (successLevel == 0)
+        if (successLevel == SuccessLevel.CriticalFailure)
         {
             return 0;
         }
-        else if(successLevel == 1)
+        else if(successLevel == SuccessLevel.Failure)
         {
             return associatedTableEntry.failedReward;
         }
 
-        if(successLevel == 3)
+        // A critical success gives the next highest table entry
+        if(successLevel == SuccessLevel.CriticalSuccess)
         {
-            associatedTableEntry = this.lookup[taskLevel];
+            associatedTableEntry = this.lookup[taskLevel + 1];
         }
 
+        // All success rolls give a value based on expertise
         switch(expertise)
         {
             case("trained"):
@@ -56,54 +58,52 @@ class DowntimeLogic{
                 return associatedTableEntry.masterReward;
             case("legendary"):
                 return associatedTableEntry.legendaryReward;
-            // Ouch, something broke
             default:
-                return -1;
+                throw new RangeError("Supplied invalid expertise type");
          }
     }
 
     // This really seems like it should already exist somewhere...
-    // TODO use enums, it's cleaner
-    rollSkillCheck(roll: DiceTerm.Result, DC: number): number{
-        var successLevel;
+    rollSkillCheck(roll: DiceTerm.Result, DC: number): SuccessLevel{
+        var successValue;
 
         // Calculate base success
         if (roll.result <= DC - 10)
         {
-            successLevel = 0;
+            successValue = 0;
         }
         else if (roll.result < DC)
         {
-            successLevel = 1;
+            successValue = 1;
         }
         else if (roll.result >= DC + 10)
         {
-            successLevel = 3;
+            successValue = 3;
         }
         else
         {
-            successLevel = 2;
+            successValue = 2;
         }
 
         // Modify for dice crits
         if (roll.success)
         {
-            successLevel++;
+            successValue++;
         }
         else if (roll.failure)
         {
-            successLevel--;
+            successValue--;
         }
 
-        if (successLevel < 0)
+        if (successValue < 0)
         {
-            successLevel = 0;
+            successValue = 0;
         }
-        if (successLevel > 3)
+        if (successValue > 3)
         {
-            successLevel = 3;
+            successValue = 3;
         }
-        return successLevel;
+        return SuccessLevelInverse.convert(successValue)
     }
 }
 

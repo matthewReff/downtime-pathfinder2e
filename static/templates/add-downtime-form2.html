@@ -1,0 +1,58 @@
+<form class="pathfinder2e-downtime-form" autocomplete="off">
+  <header class="">
+    <div style="display:flex; flex-direction:row;">
+      <div style="width:160px; border-right: 1px solid #b5b3a4; border-bottom: 1px solid #b5b3a4; box-shadow: 0px 1px 1px 0px #f0f0e0; padding-right: 5px;">
+        <span style="text-align: center; width: 160px; display: block;">Icon in Chat</span>
+        <img style="height: 140px; width: 160px;" class="file-picker-cust" src="{{task.chat_icon}}" data-type="image"></img>
+      </div>
+      <div style="padding:0px 0px 0px 5px;">
+        <label>Name:</label>
+        <input type="text" id="name" name="name" value="{{task.name}}"/>
+        <label>Description:</label>
+        <textarea name="description" id="desc">{{task.description}}</textarea>
+        <!-- Thank you CUB Condition Lab (errational!) -->
+        <label>Icon in Character Sheet</label>
+        <div class="path">
+          <input type="text" name="sheet_icon" title="Status Icon Path" class="icon-path" value="{{task.sheet_icon}}" placeholder="/icons/example.svg" data-dtype="String">
+          <button type="button" name="file-picker" class="file-picker" data-type="image" data-target="sheet_icon" title="Browse Files" tabindex="-1">
+            <i class="fas fa-file-import fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+</p>        
+  <body>
+
+    <h2>Rolls</h2>
+    <!-- Roll Table Results Loop -->
+    <section class="results" id="rollsTable">
+      
+      <div class="task-skill-classs" id="task-skill">
+        <label for="task.skill">Task Skill:</label><br>
+        <select id="TASK_SKILL" name="task.skill">
+          {{#each skills}}
+            <option value="{{@key}}">{{this}}</option>
+          {{/each}}
+        </select>
+      </div>
+
+      <div class="task.level-class" id="task-level">
+        <label for="task.level">Task Level:</label><br>
+        <input type="number" name="task.level" value="{{task.level}}" placeholder="0" min="0" max="20">
+      </div>
+    </section>
+
+
+  <h2>Options</h2>
+
+  <div class="pathfinder2e-downtime-options">
+    <input type="checkbox" id="privateActivity" name="options.rolls_are_private">Private Roll</input>
+    <input type="checkbox" id="hidden2" name="options.hidden">Hidden from Players?</input>
+    
+  </div>
+  <hr>
+  <footer>
+    <button type="submit" name="submit" value="1">Submit</button>
+  </footer>
+</form>

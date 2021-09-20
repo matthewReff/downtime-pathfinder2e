@@ -8,6 +8,10 @@ interface IncomeTableEntry {
     readonly legendaryReward: number;
 }
 
+interface DowntimeData {
+	skills: any[] //TODO This is a StatisticModifier, why isn't that in types?
+};
+
 class Task {
 	name: string;
 	lore: string;
@@ -20,14 +24,11 @@ class Task {
 	}
 }
 
-const FORM_TEMPLATE = "modules/downtime-pathfinder2e/templates/add-downtime-form.html";
+const FORM_TEMPLATE = "modules/downtime-pathfinder2e/templates/add-downtime-form2.html";
 
-class Form extends FormApplication {
+class AddDowntimeTypeForm extends FormApplication<FormApplication.Options, DowntimeData> {
 	constructor([...args]) {
 	  super([...args]);
-
-	  const temp3: Game = game as Game;
-	  temp3.users?.apps?.push(this);
 	}
 
 	static get defaultOptions() {
@@ -38,14 +39,49 @@ class Form extends FormApplication {
 			closeOnSubmit: true,
 			popOut       : true,
 			width        : 800,
-			height       : "auto",
+			height       : 800,
 		} as FormApplication.Options);
 	}
 
 	async _updateObject(event: Event, formData: FormData) {
 		console.log(event);
 		console.log(formData);
+		// TODO Use formData to set settings
+	}
+
+	async getData()
+	{
+		const skillsList: any[] = CONFIG['PF2E']['skillList'];
+		return {
+			skills: skillsList
+		}
 	}
 }
 
-export {IncomeTableEntry, Task, Form}
+enum SuccessLevel {
+	CriticalFailure = 0,
+	Failure = 1,
+	Success = 2,
+	CriticalSuccess = 3
+}
+
+// Gross reverse mapping
+abstract class SuccessLevelInverse {
+	static convert(successValue: number) {
+        switch (successValue)
+        {
+            case(0):
+                return SuccessLevel.CriticalFailure;
+            case(1):
+                return SuccessLevel.Failure;
+            case(2):
+                return SuccessLevel.Success
+            case(3):
+                return SuccessLevel.CriticalSuccess
+            default:
+            	throw new RangeError("Success value has no valid conversion")
+        }
+	}
+}
+
+export {IncomeTableEntry, Task, AddDowntimeTypeForm, SuccessLevel, SuccessLevelInverse}

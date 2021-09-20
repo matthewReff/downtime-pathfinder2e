@@ -1,4 +1,4 @@
-import { Form } from "./commonClasses";
+import { AddDowntimeTypeForm } from "./commonClasses";
 
 Hooks.on("init", function() {
   console.log("This code runs once the Foundry VTT software begins it's initialization workflow.");
@@ -6,9 +6,12 @@ Hooks.on("init", function() {
 
 Hooks.on("ready", function() {
   console.log("This code runs once core initialization is ready and game data is available.");
-  console.log(CONFIG['PF2E']['skillList']);
+  const pathfinderConfig = CONFIG['PF2E'];
+  console.log(pathfinderConfig['skillList']);
   const settingsContainer = document.getElementById("settings-game")
- 
+  //const temp3: Game = game as Game;
+  //temp3.users?.apps?.push(this);
+
   const button = document.createElement("button")
   button.innerText = "Print Debug 1"
   button.onclick = function(){
@@ -34,7 +37,7 @@ Hooks.on("ready", function() {
   button2.innerText = "Print Debug 2"
   button2.onclick = function(){
     // Add New Downtime Activity
-    const form = new Form([]);
+    const form = new AddDowntimeTypeForm([]);
     form.render(true);
   };
   if(settingsContainer){
