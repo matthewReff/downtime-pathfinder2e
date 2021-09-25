@@ -29,7 +29,7 @@ class DowntimeLogic{
 
     calculateReward(taskLevel: number, roll: DiceTerm.Result, expertise: string): number{
         let associatedTableEntry: IncomeTableEntry = this.lookup[taskLevel];
-        let successLevel: SuccessLevel = this.rollSkillCheck(roll, associatedTableEntry.DC);
+        const successLevel: SuccessLevel = this.rollSkillCheck(roll, associatedTableEntry.DC);
 
         // Failure states are easy, just return them
         if (successLevel == SuccessLevel.CriticalFailure)

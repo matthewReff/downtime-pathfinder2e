@@ -1,4 +1,10 @@
-import { AddDowntimeTypeForm } from "./commonClasses";
+import { AddDowntimeForm } from "./addDowntimeForm";
+import { DowntimeState } from "./downtimeState";
+//import { DowntimeLogic } from "./downtimeLogic";
+
+
+const state: DowntimeState = new DowntimeState()
+//let logic: DowntimeLogic = new DowntimeLogic()
 
 Hooks.on("init", function() {
   console.log("This code runs once the Foundry VTT software begins it's initialization workflow.");
@@ -37,7 +43,7 @@ Hooks.on("ready", function() {
   button2.innerText = "Print Debug 2"
   button2.onclick = function(){
     // Add New Downtime Activity
-    const form = new AddDowntimeTypeForm([]);
+    const form = new AddDowntimeForm(state, []);
     form.render(true);
   };
   if(settingsContainer){

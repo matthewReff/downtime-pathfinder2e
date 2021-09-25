@@ -8,9 +8,6 @@ interface IncomeTableEntry {
     readonly legendaryReward: number;
 }
 
-interface DowntimeData {
-	skills: any[] //TODO This is a StatisticModifier, why isn't that in types?
-};
 
 class Task {
 	name: string;
@@ -24,39 +21,6 @@ class Task {
 	}
 }
 
-const FORM_TEMPLATE = "modules/downtime-pathfinder2e/templates/add-downtime-form2.html";
-
-class AddDowntimeTypeForm extends FormApplication<FormApplication.Options, DowntimeData> {
-	constructor([...args]) {
-	  super([...args]);
-	}
-
-	static get defaultOptions() {
-		return mergeObject(super.defaultOptions, {
-			id           : "downtime-pathfinder2e",
-			template     : FORM_TEMPLATE,
-			title        : "Downtime Activity Modification",
-			closeOnSubmit: true,
-			popOut       : true,
-			width        : 800,
-			height       : 800,
-		} as FormApplication.Options);
-	}
-
-	async _updateObject(event: Event, formData: FormData) {
-		console.log(event);
-		console.log(formData);
-		// TODO Use formData to set settings
-	}
-
-	async getData()
-	{
-		const skillsList: any[] = CONFIG['PF2E']['skillList'];
-		return {
-			skills: skillsList
-		}
-	}
-}
 
 enum SuccessLevel {
 	CriticalFailure = 0,
@@ -84,4 +48,4 @@ abstract class SuccessLevelInverse {
 	}
 }
 
-export {IncomeTableEntry, Task, AddDowntimeTypeForm, SuccessLevel, SuccessLevelInverse}
+export { IncomeTableEntry, Task, SuccessLevel, SuccessLevelInverse }

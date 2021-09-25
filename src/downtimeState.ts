@@ -10,7 +10,8 @@ class DowntimeState {
 	}
 
 	createTask(taskName: string, loreString: string, taskLevel: number): boolean {
-		let compareTask: Task = new Task(taskName, loreString, taskLevel);
+		console.log("Creating task:" + taskName + " " + loreString + " " + taskLevel.toString());
+		const compareTask: Task = new Task(taskName, loreString, taskLevel);
 		if (this.createdTasks.contains(compareTask)){
 			return false
 		}
@@ -20,13 +21,13 @@ class DowntimeState {
 
 	updateTask(oldTaskName: string, oldloreString: string, oldTaskLevel: number, newTaskName: string, newLoreString: string, newTaskLevel: number): boolean {
 		// check if old task exists
-		let oldTask: Task = new Task(oldTaskName, oldloreString, oldTaskLevel);
+		const oldTask: Task = new Task(oldTaskName, oldloreString, oldTaskLevel);
 		if (!this.createdTasks.contains(oldTask)){
 			return false;
 		}
 
 		// Check if new task exists
-		let newTask: Task = new Task(newTaskName, newLoreString, newTaskLevel);
+		const newTask: Task = new Task(newTaskName, newLoreString, newTaskLevel);
 		if (this.createdTasks.contains(newTask)){
 			return false;
 		}
@@ -36,7 +37,7 @@ class DowntimeState {
 	}
 
 	deleteTask(taskName: string, loreString: string, taskLevel: number): boolean {
-		let compareTask: Task = new Task(taskName, loreString, taskLevel);
+		const compareTask: Task = new Task(taskName, loreString, taskLevel);
 		if (this.createdTasks.contains(compareTask)){
 			this.createdTasks.remove(compareTask);
 			return true;
